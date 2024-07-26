@@ -1,18 +1,14 @@
 <script setup>
-  defineProps(['produto', 'linguagens', 'hobbies', 'estados']);
-  
+const dados = defineProps(['produto', 'linguagens', 'hobbies', 'estados'])
 
-
-  const emits = defineEmits(['mostrar']) 
-  function enviar(){
-    if( senha != confirmS){
-      alert('As senha estão diferentes')
-    }
-    else{
-      emits(defineEmits)
-    }
-
+const emits = defineEmits(['mostrar'])
+function enviar() {
+  if (dados.produto.senha != dados.produto.confirmS) {
+    alert('As senha estão diferentes')
+  } else {
+    emits('mostrar')
   }
+}
 </script>
 
 <template>
@@ -20,39 +16,44 @@
     <h1>Formulario</h1>
     <div class="row">
       <label for="nome">Nome: </label>
-      <input type="text" v-model="produto.nome" minlength="3" maxlength="50" required />
+      <input type="text" v-model="dados.produto.nome" minlength="3" maxlength="50" required />
     </div>
     <div class="row">
       <label for="email">Email: </label>
-      <input type="email" v-model="produto.email" required/>
+      <input type="email" v-model="dados.produto.email" required />
     </div>
     <div class="row">
       <label for="senha">Senha: </label>
-      <input type="password" name="senha" v-model="produto.senha" required/>
+      <input type="password" name="senha" v-model="dados.produto.senha" required />
       <label for="confirmS">Confirmação de senha: </label>
-      <input type="password" name="confirmS" v-model="produto.confirmS" required/>
+      <input type="password" name="confirmS" v-model="dados.produto.confirmS" required />
     </div>
     <div class="row">
       <label for="dnasc">Data de Nascimento: </label>
-      <input type="date" v-model="produto.dnasc" required/>
+      <input type="date" v-model="dados.produto.dnasc" required />
     </div>
     <div class="row">
       <label for="enderoco">Endereço: </label>
-      <input type="text" v-model="produto.enderoco" required />
+      <input type="text" v-model="dados.produto.enderoco" required />
     </div>
     <fieldset>
       <legend>Estados</legend>
       <div class="itens-estados">
-        <div v-for="estado in estados" :key="estado.id">
-          <input type="checkbox" v-model="produto.estado" :value="estado.id" />{{ estado.name }}
-        </div>
+        <select v-model="dados.produto.estado">
+          <option disabled value="">Select an option</option>
+          <option v-for="estado in estados" :key="estado.id" :value="estado.id">
+            {{ estado.name }}
+          </option>
+        </select>
       </div>
     </fieldset>
     <fieldset>
       <legend>Hobbies</legend>
       <div class="itens-estados">
         <div v-for="hobbie in hobbies" :key="hobbie.id">
-          <input type="checkbox" v-model="produto.hobbie" :value="hobbie.id" />{{ hobbie.name }}
+          <input type="checkbox" v-model="dados.produto.hobbie" :value="hobbie.id" />{{
+            hobbie.name
+          }}
         </div>
       </div>
     </fieldset>
@@ -60,7 +61,7 @@
       <legend>Linguagens</legend>
       <div class="itens-estados">
         <div v-for="linguagem in linguagens" :key="linguagem.id">
-          <input type="checkbox" v-model="produto.linguagem" :value="linguagem.id"  />{{
+          <input type="checkbox" v-model="dados.produto.linguagem" :value="linguagem.id" />{{
             linguagem.name
           }}
         </div>
@@ -68,7 +69,6 @@
     </fieldset>
     <button type="submit">Enviar</button>
   </form>
-  
 </template>
 
 <style scoped>
@@ -97,7 +97,8 @@ form {
 
 h1 {
   margin: 0 0 15px 0;
-  padding: 0;margin: 0 0 15px 0;
+  padding: 0;
+  margin: 0 0 15px 0;
   padding: 0;
   color: white;
   text-align: center;
@@ -110,4 +111,3 @@ fieldset {
   margin-bottom: 4px;
 }
 </style>
-
