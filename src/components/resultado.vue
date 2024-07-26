@@ -1,9 +1,10 @@
 <script setup>
   defineProps(['produto']);
+  defineEmits(['mostrar'])
 </script>
 
 <template>
-  <Trasintion>
+  
         <div  class="resultado">
           <h2>Resultado</h2>
           <h3>Informações do usuario</h3>
@@ -16,10 +17,9 @@
           <p>Estado: {{ produto.estado }}</p>
           <p>Hobbies: {{ produto.hobbie }}</p>
           <p>liguagem: {{ produto.linguagem }}</p>
-          <p>{{ mostrarResultado }}</p>
-          <button>editar</button>
+          <button @click="$emit('mostrar')">editar</button>
         </div>
-      </Trasintion>
+      
 </template>
 
 <style scoped>
@@ -37,7 +37,7 @@ h3{
   color: white;
   text-align: center;
 }
-Trasintion{
+.resultado{
   min-height: 80vh;
   width: 50vw;
   border-radius: 10px;

@@ -1,33 +1,44 @@
 <script setup>
-  import { ref,defineProps } from 'vue';
   defineProps(['produto', 'linguagens', 'hobbies', 'estados']);
-  const mostrarResultado = ref(false);
+  
+
+
+  const emits = defineEmits(['mostrar']) 
+  function enviar(){
+    if( senha != confirmS){
+      alert('As senha estão diferentes')
+    }
+    else{
+      emits(defineEmits)
+    }
+
+  }
 </script>
 
 <template>
-  <form @submit.prevent="" v-if="!mostrarResultado">
+  <form @submit.prevent="enviar">
     <h1>Formulario</h1>
     <div class="row">
       <label for="nome">Nome: </label>
-      <input type="text" v-model="produto.nome" minlength="3" maxlength="50" />
+      <input type="text" v-model="produto.nome" minlength="3" maxlength="50" required />
     </div>
     <div class="row">
       <label for="email">Email: </label>
-      <input type="email" v-model="produto.email" />
+      <input type="email" v-model="produto.email" required/>
     </div>
     <div class="row">
       <label for="senha">Senha: </label>
-      <input type="password" name="senha" v-model="produto.senha" />
+      <input type="password" name="senha" v-model="produto.senha" required/>
       <label for="confirmS">Confirmação de senha: </label>
-      <input type="password" name="confirmS" v-model="produto.confirmS" />
+      <input type="password" name="confirmS" v-model="produto.confirmS" required/>
     </div>
     <div class="row">
       <label for="dnasc">Data de Nascimento: </label>
-      <input type="date" v-model="produto.dnasc" />
+      <input type="date" v-model="produto.dnasc" required/>
     </div>
     <div class="row">
       <label for="enderoco">Endereço: </label>
-      <input type="text" v-model="produto.enderoco" />
+      <input type="text" v-model="produto.enderoco" required />
     </div>
     <fieldset>
       <legend>Estados</legend>
@@ -49,13 +60,13 @@
       <legend>Linguagens</legend>
       <div class="itens-estados">
         <div v-for="linguagem in linguagens" :key="linguagem.id">
-          <input type="checkbox" v-model="produto.linguagem" :value="linguagem.id" />{{
+          <input type="checkbox" v-model="produto.linguagem" :value="linguagem.id"  />{{
             linguagem.name
           }}
         </div>
       </div>
     </fieldset>
-    <button @click="$emit('mostrar')">Enviar</button>
+    <button type="submit">Enviar</button>
   </form>
   
 </template>

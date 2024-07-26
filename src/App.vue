@@ -52,11 +52,12 @@ const linguagens = [
   { id: 'c++', name: 'c++' },
   { id: 'php', name: 'php' }
 ];
+const mostrarResultado = ref(false)
 
 function motrarResultado(){
-  mostrarResultado.value = true;
+  mostrarResultado.value = !mostrarResultado.value
 }
-const mostrarResultado = ref(false)
+
 </script>
 
 <template>
@@ -64,7 +65,7 @@ const mostrarResultado = ref(false)
   <div class="container">
    <div>
     <formulario v-if="!mostrarResultado" @mostrar="motrarResultado" :produto="produto" :linguagens="linguagens"  :hobbies ="hobbies" :estados ="estados" />
-    <resultado v-if="mostrarResultado" :produto="produto"/>
+    <resultado v-if="mostrarResultado" @mostrar="motrarResultado" :produto="produto"/>
   </div>
   </div>
 </template>
